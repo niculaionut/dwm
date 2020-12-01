@@ -298,6 +298,20 @@ float tags_mfacts[9] = {mfact, mfact, mfact, mfact, mfact, mfact, mfact, mfact, 
 //added functions
 
 int
+clamp(int x, int a, int b)
+{
+  if(x < a)
+  {
+    return a;
+  }
+  if(x > b)
+  {
+    return b;
+  }
+  return x;
+}
+
+int
 bitpos(int x)
 {
     int res = 0;
