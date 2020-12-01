@@ -245,6 +245,8 @@ static void togglefullscreen(const Arg* arg);
 static void cycle_scroll_left(const Arg* arg);
 static void cycle_scroll_right(const Arg* arg);
 static void togglelayout(const Arg* arg);
+static void scroll_left(const Arg* arg);
+static void scroll_right(const Arg* arg);
 
 //added variables
 
@@ -361,6 +363,30 @@ togglelayout(const Arg *arg)
   Arg targ;
   targ.v = &layouts[currentlayout];
   setlayout(&targ);
+}
+
+void
+scroll_left(const Arg* arg)
+{
+  int current_tag = selmon->tagset[selmon->seltags];
+  current_tag = clamp(current_tag >> 1, 1 << 0, 1 << 8);
+  selmon->seltags ^= 1;
+  selmon->tagset[selmon->seltags] = current_tag;
+  selmon->mfact = tags_mfacts[bitpos(current_tag)-1];
+  focus(NULL);
+  arrange(selmon);
+}
+
+void
+scroll_right(const Arg* arg)
+{
+  int current_tag = selmon->tagset[selmon->seltags];
+  current_tag = clamp(current_tag << 1, 1 << 0, 1 << 8);
+  selmon->seltags ^= 1;
+  selmon->tagset[selmon->seltags] = current_tag;
+  selmon->mfact = tags_mfacts[bitpos(current_tag)-1];
+  focus(NULL);
+  arrange(selmon);
 }
 
 //added utility functions
