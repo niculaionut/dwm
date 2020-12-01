@@ -1707,6 +1707,8 @@ setmfact(const Arg *arg)
 	f = arg->f < 1.0 ? arg->f + selmon->mfact : arg->f - 1.0;
 	if (f < 0.05 || f > 0.95)
 		return;
+
+	tags_mfacts[bitpos(selmon->tagset[selmon->seltags])-1]=f;
 	selmon->mfact = f;
 	arrange(selmon);
 }
