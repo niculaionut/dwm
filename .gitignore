@@ -1,2 +1,6 @@
-*.rej
+dwm
 *.o
+*.orig
+*.rej
+compile_flags.txt
+.clangd
