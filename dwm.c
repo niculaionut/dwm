@@ -235,6 +235,50 @@ static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 
+//added functions
+
+void
+cycle_scroll_left(const Arg* arg)
+{
+  int current_tag = selmon->tagset[selmon->seltags];
+  current_tag = current_tag >> 1;
+  if(current_tag == 0)
+  {
+    current_tag = 1 << 8;
+  }
+  selmon->seltags ^= 1;
+  selmon->tagset[selmon->seltags] = current_tag;
+  selmon->mfact = tags_mfacts[bitpos(current_tag)-1];
+  focus(NULL);
+  arrange(selmon);
+}
+
+void
+cycle_scroll_right(const Arg* arg)
+{
+  int current_tag = selmon->tagset[selmon->seltags];
+  current_tag = current_tag << 1;
+  if(current_tag == 1 << 9)
+  {
+    current_tag = 1 << 0;
+  }
+  selmon->seltags ^= 1;
+  selmon->tagset[selmon->seltags] = current_tag;
+  selmon->mfact = tags_mfacts[bitpos(current_tag)-1];
+  focus(NULL);
+  arrange(selmon);
+}
+
+void
+togglefullscreen(const Arg* arg)
+{
+  togglebar(NULL);
+  Arg targ;
+  targ.v = (isfulltoggled == 0 ? &layouts[2] : &layouts[0]);
+  isfulltoggled = (isfulltoggled == 1 ? 0 : 1);
+  setlayout(&targ);
+}
+
 /* variables */
 static const char broken[] = "broken";
 static char stext[256];
