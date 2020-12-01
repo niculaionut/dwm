@@ -18,20 +18,15 @@ static const char col_cyan[]        = "#f59542";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray6, col_gray5, col_gray2 },
-	[SchemeSel]  = { "#000000", col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray5, col_cyan,  col_cyan  },
 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
+static Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ NULL,       NULL,       NULL,       0,            False,       -1 },
 };
 
 /* layout(s) */
@@ -45,7 +40,6 @@ static const Layout layouts[] = {
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "TTT",      bstack },
-	{ "===",      bstackhoriz },
 };
 
 /* key definitions */
@@ -61,7 +55,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray5, "-nf", col_gray6, "-sb", col_cyan, "-sf", col_gray5, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 
@@ -107,7 +101,6 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
@@ -116,5 +109,10 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTagBar,            0,              Button4,        scroll_left,    {0} },
+	{ ClkTagBar,            0,              Button5,        scroll_right,   {0} },
+	{ ClkStatusText,        0,              Button4,        scroll_left,    {0} },
+	{ ClkStatusText,        0,              Button5,        scroll_right,   {0} },
+	{ ClkWinTitle,          0,              Button4,        scroll_left,    {0} },
+	{ ClkWinTitle,          0,              Button5,        scroll_right,   {0} },
 };
-
