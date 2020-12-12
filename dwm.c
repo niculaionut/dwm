@@ -1374,7 +1374,7 @@ movemouse(const Arg *arg)
 
 	if (!(c = selmon->sel))
 		return;
-	if (c->isfullscreen) /* no support moving fullscreen windows by mouse */
+	if (c->isfullscreen || !c->isfloating) /* no support moving fullscreen windows by mouse */
 		return;
 	restack(selmon);
 	ocx = c->x;
