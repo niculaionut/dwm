@@ -4,3 +4,4 @@ dwm
 *.rej
 compile_flags.txt
 .clangd
+config.def.h
