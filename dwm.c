@@ -378,6 +378,7 @@ togglefullscreen(const Arg* arg)
   Arg targ;
   targ.v = (isfulltoggled == 0 ? &layouts[2] : &layouts[0]);
   isfulltoggled = (isfulltoggled == 1 ? 0 : 1);
+  resizehints = !resizehints;
   setlayout(&targ);
 }
 
