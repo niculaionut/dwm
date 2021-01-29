@@ -376,12 +376,8 @@ cycle_scroll_right(const Arg* arg)
 void
 togglefullscreen(const Arg* arg)
 {
-  togglebar(NULL);
-  Arg targ;
-  targ.v = (isfulltoggled == 0 ? &layouts[2] : &layouts[0]);
-  isfulltoggled = (isfulltoggled == 1 ? 0 : 1);
-  resizehints = !resizehints;
-  setlayout(&targ);
+    if(selmon->sel)
+        setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
 }
 
 void
