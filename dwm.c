@@ -225,7 +225,6 @@ static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *);
-static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
@@ -260,9 +259,7 @@ static void scroll_right(const Arg* arg);
 
 //added variables
 
-static char isfulltoggled = 0;
 static unsigned int currentlayout = 0;
-
 
 static pid_t getparentprocess(pid_t p);
 static int isdescprocess(pid_t p, pid_t c);
@@ -1974,15 +1971,6 @@ tile(Monitor *m)
 				ty += HEIGHT(c) + m->gappx;
       sfacts -= c->cfact;
 		}
-}
-
-void
-togglebar(const Arg *arg)
-{
-	selmon->showbar = !selmon->showbar;
-	updatebarpos(selmon);
-	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
-	arrange(selmon);
 }
 
 void
