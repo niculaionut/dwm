@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 4;        /* gaps between windows */
+static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -33,6 +33,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static Rule rules[] = {
   /* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "st-256color",      NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "gnome-screenshot", NULL,     NULL,           0,         0,          0,           1,        -1 },
 };
 
 /* layout(s) */
